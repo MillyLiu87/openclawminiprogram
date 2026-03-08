@@ -1,0 +1,62 @@
+<!-- pages/chat/chat.wxml -->
+<view class="container">
+
+  <!-- 顶部状态栏 -->
+  <view class="status-bar">
+    <text class="status-dot {{connected ? 'online' : 'offline'}}">●</text>
+    <text class="status-text">{{connected ? '已连接' : '连接中...'}}</text>
+  </view>
+
+  <!-- 消息列表 -->
+  <scroll-view
+    class="message-list"
+    scroll-y
+    scroll-into-view="{{scrollToId}}"
+    scroll-with-animation
+  >
+    <view wx:for="{{messages}}" wx:key="id" id="msg-{{item.id}}"
+          class="msg-row {{item.role === 'user' ? 'user-row' : 'ai-row'}}">
+
+      <!-- AI 头像 -->
+      <view wx:if="{{item.role === 'ai'}}" class="avatar ai-avatar-text">🤖</view>
+
+      <!-- 气泡 -->
+      <view class="bubble {{item.role === 'user' ? 'user-bubble' : 'ai-bubble'}}">
+        <text selectable>{{item.content}}</text>
+      </view>
+
+      <!-- 用户头像 -->
+      <view wx:if="{{item.role === 'user'}}" class="avatar user-avatar-text">👤</view>
+    </view>
+
+    <!-- AI 思考中 -->
+    <view wx:if="{{isTyping}}" class="msg-row ai-row">
+      <view class="avatar ai-avatar-text">🤖</view>
+      <view class="bubble ai-bubble typing-bubble">
+        <text class="dot">·</text><text class="dot">·</text><text class="dot">·</text>
+      </view>
+    </view>
+
+    <!-- 底部占位 -->
+    <view style="height: 20rpx;" />
+  </scroll-view>
+
+  <!-- 输入区 -->
+  <view class="input-area">
+    <input
+      class="input-box"
+      value="{{inputText}}"
+      placeholder="说点什么..."
+      confirm-type="send"
+      bindinput="onInputChange"
+      bindconfirm="onSend"
+      adjust-position
+    />
+    <button
+      class="send-btn {{inputText ? 'active' : ''}}"
+      bindtap="onSend"
+      disabled="{{!inputText || !connected}}"
+    >发送</button>
+  </view>
+
+</view>

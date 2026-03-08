@@ -1,0 +1,5 @@
+/* 全局样式 */
+page {
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
