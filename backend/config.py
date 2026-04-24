@@ -12,16 +12,17 @@ if _env_file.exists():
             k, v = line.split("=", 1)
             os.environ.setdefault(k.strip(), v.strip())
 
-# ─── OpenClaw 连接配置 ────────────────────────────────────────────
-OPENCLAW_HOST     = os.getenv("OPENCLAW_HOST", "localhost")
-OPENCLAW_PORT     = int(os.getenv("OPENCLAW_PORT", "18789"))
-OPENCLAW_BASE_URL = os.getenv("OPENCLAW_BASE_URL", f"http://localhost:18789")
+# ─── DeepSeek 连接配置 ────────────────────────────────────────────
+# DeepSeek 使用 OpenAI-compatible API
+DEEPSEEK_BASE_URL = os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
+DEEPSEEK_API_KEY  = os.getenv("DEEPSEEK_API_KEY", "")
+DEEPSEEK_MODEL    = os.getenv("DEEPSEEK_MODEL", "deepseek-chat")
 
-# Gateway Bearer Token（openclaw.json → gateway.auth.token）
-OPENCLAW_TOKEN    = os.getenv("OPENCLAW_TOKEN", "")
+# 系统提示词（可选）
+SYSTEM_PROMPT = os.getenv("SYSTEM_PROMPT", "你是一个乐于助人的 AI 助手。")
 
-# 用哪个 Agent 回答小程序用户（可改成任意 agent id）
-OPENCLAW_AGENT_ID = os.getenv("OPENCLAW_AGENT_ID", "main")
+# 每个用户保留的对话历史最大条数（user+assistant 合计）
+HISTORY_MAX_MESSAGES = int(os.getenv("HISTORY_MAX_MESSAGES", "20"))
 
 # ─── 后端服务配置 ─────────────────────────────────────────────────
 BACKEND_HOST = os.getenv("BACKEND_HOST", "0.0.0.0")
