@@ -1,8 +1,8 @@
 // utils/config.js — 小程序所有配置集中在这里
 const Config = {
-  // 后端服务地址（开发时填 VPS IP，上线后换域名）
-  BACKEND_HTTP: 'http://91.99.106.216:8000',
-  BACKEND_WS:   'ws://91.99.106.216:8000',
+  // 后端服务地址（生产必须 https/wss + 域名，微信强制要求）
+  BACKEND_HTTP: 'https://chat.clawhelp.net',
+  BACKEND_WS:   'wss://chat.clawhelp.net',
 
   // 开发模式：跳过 wx.login，直接用固定 openid 测试
   // 上线前改为 false
